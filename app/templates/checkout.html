@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block content %}
+    <div>
+        <div class="checkout">
+            <div class="checkout__customer">
+                <div class="checkout__customer__info">
+                    <h2> Информация о клиенте</h2>
+                    <form action="" method="post">
+                        {{ form.hidden_tag() }}
+                            <div class="checkout__customer__info__name">
+                                {{ form.name(placeholder="Имя") }}
+                            </div>
+                            <div class="checkout__customer__info__sdt">
+                                {{ form.number(placeholder="Номер телефона") }}
+                            </div>
+                            <div class="checkout__customer__info__add">
+                                {{ form.email(placeholder="Email") }}
+                            </div>
+                            <div class="checkout__customer__info__email">
+                                {{ form.comment(placeholder="Комментарий к заказу") }}
+                            </div>
+                            <div class="checkout__customer__info__total">
+                                <div>
+                                    <div class="cart__info__txt__price">
+                                        <span>Итого</span>
+                                        <span>{{ total }}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn bg-main btn-block">
+                                {{ form.submit(class="btn bg-main btn-block checkout_submit_button") }}
+                            </button>
+                    </form>
+                </div>
+            </div>
+            <div class="checkout__list">
+                <h2>Товары</h2>
+                {% for product in products %}
+                    <div class="checkout__list__item">
+                        <div class="checkout__list__item__image">
+                            <img src="{{ url_for('static',filename='photos/'+product[2]) }}" alt="">
+                        </div>
+                        <div class="checkout__list__item__info">
+                            <div class="checkout__list__item__info__name">
+                                <a href="{{ url_for('main.product', product_id=product[1]) }}">{{ product[3] }}<br />{{ product[4] }}<br/>{{ product[5] }}</a>
+                            </div>
+                            <div class="checkout__list__item__info__quantity">{{ product[8] }}</div>
+                            <div class="checkout__list__item__info__price">{{ product[6] }} руб.</div>
+                        </div>
+                    </div>
+                {% endfor %}
+                <div class="policy">
+                    <div>
+                        <div class="policy__received">
+                            <div class="policy__title">
+                                <i class="bx bxs-purchase-tag"></i>
+                                <p>Бесплатная доставка для заказов на сумму от 15.000 рублей</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

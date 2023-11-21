@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+	<noscript>You need to enable JavaScript to run this app.</noscript>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<link rel="icon" type="image/png" href="{{ url_for('static', filename='images//logo714.png') }}">
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/media-queries.css') }}" />
+		<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+		<html lang="ru" />
+		{% block head %}{% endblock %}
+		<title>714 Street - {{ title }}</title>
+	</head>
+	<body id="body">
+		<nav>
+			<div class="main_nav">
+				<div class="nav_logo">
+					<a href="/"><img class="img_logo" src="{{ url_for('static', filename='images//logo714trang.png') }}" alt=""></a>
+				</div>
+				<div class="nav_menu">
+					<div class="header__menu__mobile-toggle"><i id="menu" class="bx bx-menu-alt-left"></i></div>
+					<div class="nav_menu_left">
+						<div class="header__menu__left__close"><i id="menu_close" class="bx bx-chevron-left"></i></div>
+						<div class="nav_menu_item nav_menu_left_item">
+							<a href="/">
+								<span style="font-weight: 700">Главная</span>
+							</a>
+						</div>
+						<div class="nav_menu_item nav_menu_left_item">
+							<a href="/catalog">
+								<span>Каталог</span>
+							</a>
+						</div>
+						<div class="nav_menu_item nav_menu_left_item">
+							<a href="/sales">
+								<span>Распродажа</span>
+							</a>
+						</div>
+						<div class="nav_menu_item nav_menu_left_item">
+							<a href="/about">
+								<span>О нас</span>
+							</a>
+						</div>
+					</div>
+					<div class="nav_menu_right">
+						<div class="header__menu__item header__menu__right__item">	</div>
+						<a href="/cart">
+							<img class="nav_menu_right_item_cart" src="{{ url_for('static', filename='images//shopping-cart.png') }}" alt="">
+							<div class="header__menu__right__item__quantity">{{ count_products }}</div>
+						</a>
+					</div>
+				</div>
+			</div>
+		</nav>
+		<div class="cont_main">
+			<div class="main">
+				{% block content %}{% endblock %}
+			</div>
+		</div>
+		<footer>
+			<div class="main_footer">
+				<div class="grid grid-col-4 grid-col-md-2 grid-col-sm-1" style="gap: 10px;">
+					<div>
+						<div class="footer__title">Поддержка</div>
+						<div class="footer__content">
+							<p>Оформить заказ <a href="tel:+79055095074"><strong>+7(905) 509-50-74</strong></a></p>
+							<p>Вопросы <a href="tel:+79857383827"><strong>+7(985) 738-38-27</strong></a></p>
+						</div>
+					</div>
+						<div class="foot_about">
+							<div class="footer__title">О 714 Street</div>
+							<div class="footer__content">
+								<p><a href="/about">О нас</a></p>
+								<p><a href="/contact">Контакты</a></p>
+							</div>
+						</div>
+					<div class="care">
+						<div class="footer__title">Обслуживание клиентов</div>
+						<div class="footer__content">
+							<p><a href="/policy-refund">Политика конфиденциальности</a></p>
+						</div>
+					</div>
+					<div class="footer__about">
+							<p><a href="/"><img src="{{ url_for('static', filename='images//logo714.png') }}" class="footer__logo" alt=""></a></p>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<div class="custom-chat">
+			<div class="custom-chat__btn" id="contacts">
+				<img src="{{ url_for('static', filename='images//mess_icon.png') }}" alt="">
+			</div>
+			<div class="custom-chat__widget">
+				<div class="custom-chat__widget__content">
+					<!--<a href="https://m.me/714StreetOfficial" target="_blank" rel="noreferrer">
+						<img src="{{ url_for('static', filename='images//icons-tg.png') }}" alt="">
+						<span>Telegram</span>
+					</a>
+					-->
+					<a href="https://api.whatsapp.com/send?phone=89055095074" target="_blank" rel="noreferrer">
+						<img src="{{ url_for('static', filename='images//icons-whatsapp.png') }}" alt="">
+						<span>WhatsApp</span>
+					</a>
+				</div>
+			</div>
+		</div>
+		<script>
+			const btn1 = document.getElementById('menu');
+			const btn2 = document.getElementById('menu_close');
+			const btn3 = document.getElementById('contacts');
+			window.addEventListener('click', e => {
+				const target = e.target
+				if (!target.closest('.custom-chat__btn') && !target.closest('.custom-chat__btn')) {
+				  document.querySelector('.custom-chat__widget').classList.remove('active')
+				}
+			 })
+			if (btn1) {
+			  	btn1.addEventListener('click', () => {
+					document.querySelector('.nav_menu_left').classList.add('active');
+			  });
+			}
+			if (btn2) {
+			  	btn2.addEventListener('click', () => {
+					document.querySelector('.nav_menu_left').classList.remove('active');
+			  });
+			}
+			if (btn3) {
+			  	btn3.addEventListener('click', () => {
+					document.querySelector('.custom-chat__widget').classList.add('active');
+			  });
+			}
+		</script>
+	</body>
+</html>

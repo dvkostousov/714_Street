@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<div>
+    <div class="section sales">
+        <div class="section__title">
+          <p>Распродажа</p>
+        </div>
+        <div class="section__body">
+          <div class="grid grid-col-4 grid-col-md-2 grid-col-sm-2" style="gap: 10px;">
+            {% for product in products_sales %}
+              <div class="product-card">
+                  <a href="{{ url_for('main.product', product_id=product.id) }}">
+                      <div class="product-card__image">
+                          <img src="{{ url_for('static',filename='photos/'+product.main_photo) }}"  alt="">
+                      </div>
+                  </a>
+                  <a href="{{ url_for('main.product', product_id=product.id) }}">
+                      <h3 class="product-card__name">{{ product.name }}</h3>
+                      <div class="product-card__price">
+                          {{ product.price }}
+                          {% if product.old_price %}
+                             <span class="product-card__price__old">
+                                  <del>{{ product.old_price }}</del>
+                              </span>
+                          {% endif %}
+                      </div>
+                  </a>
+                  <div class="product-card__btn">
+                      <button class="btn bg-main btn-sm">
+                          <a href="{{ url_for('main.product', product_id=product.id) }}" class="btn__txt"> Выбрать</a>
+                      </button>
+                  </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+    </div>
+</div>
+{% endblock %}}

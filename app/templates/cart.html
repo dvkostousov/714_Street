@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block content %}
+<div>
+  <div class="cart">
+    {% if count_products > 0 %}
+      <div class="cart__list">
+        {% for product in products %}
+          <div class="cart__item">
+            <div class="cart__item__image">
+              <img src="{{ url_for('static',filename='photos/'+product[2]) }}" alt="">
+            </div>
+            <div class="cart__item__info">
+              <div class="cart__item__info__name">
+                <a href="{{ url_for('main.product', product_id=product[1]) }}">{{ product[3] }}<br />{{ product[4] }}<br/>{{ product[5] }}</a>
+              </div>
+              <div class="cart__item__info__price">{{ product[6] }}</div>
+              <div class="cart__item__info__quantity">
+                <div class="product__info__item__quantity">
+                  <div class="product__info__item__quantity__btn">
+                    <a href="{{ url_for('main.minus_count_product', note_id=product[0]) }}">
+                      <i class="bx bx-minus"></i>
+                    </a>
+                  </div>
+                  <div class="product__info__item__quantity__input">{{ product[8] }}</div>
+                  <div class="product__info__item__quantity__btn">
+                    <a href="{{ url_for('main.plus_count_product', note_id=product[0]) }}">
+                      <i class="bx bx-plus"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="cart__item__info__del">
+                <a href="{{ url_for('main.delete_chosen_product', note_id=product[0]) }}">
+                  <i class="bx bx-trash"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="cart__info">
+        <div class="cart__info__txt">
+          <p class="cart__info__txt__quantity">У вас товаров в корзине: <span> {{ total_count_products }} </span></p>
+          <div class="policy">
+            <div>
+              <div class="policy__received">
+                <div class="policy__title">
+                  <i class="bx bxs-purchase-tag"></i>
+                  <p>Бесплатная доставка для заказов на сумму от 15.000 рублей</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="cart__info__txt__price">
+              <span>Итого (без учета доставки)</span>
+              <span>{{ total }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="cart__info__btn">
+          <a href="/checkout">
+            <button class="btn bg-main btn-block ">
+              <span class="btn__txt"> Оформить заказ</span>
+            </button>
+          </a>
+          <a href="/catalog">
+            <button class="btn bg-main btn-block ">
+              <span class="btn__txt"> Продолжить покупки</span>
+            </button>
+          </a>
+        </div>
+      </div>
+    {% else %}
+      <h1>У Вас еще нет товаров в корзине</h1>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

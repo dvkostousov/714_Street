@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<noscript>You need to enable JavaScript to run this app.</noscript>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<link rel="icon" type="image/png" href="{{ url_for('static', filename='images//logo714.png') }}">
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/media-queries.css') }}" />
+		<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+		<html lang="ru" />
+		{% block head %}{% endblock %}
+		<title>714 Street - {{ title }}</title>
+	</head>
+	<body id="body">
+		<nav>
+			<div class="main_nav">
+				<div class="nav_logo">
+					<a href="/"><img class="img_logo" src="{{ url_for('static', filename='images//logo714trang.png') }}" alt=""></a>
+				</div>
+				<div class="nav_menu">
+					<div class="header__menu__mobile-toggle"><i id="menu" class="bx bx-menu-alt-left"></i></div>
+					<div class="nav_menu_left nav_menu_left_3">
+						<div class="header__menu__left__close"><i id="menu_close" class="bx bx-chevron-left"></i></div>
+						<div class="nav_menu_item nav_menu_left_item nav_menu_left_item_3_first nav_menu_left_item_3">
+							<a href="/products_list">
+								<span>Cписок товаров</span>
+							</a>
+						</div>
+						<div class="nav_menu_item nav_menu_left_item nav_menu_left_item_3">
+							<a href="/add_product">
+								<span>Добавить товар</span>
+							</a>
+						</div>
+					</div>
+					<div class="nav_menu_right nav_menu_right_3">
+						<a href="/logout" class="nav_menu_right_logout">
+								<span>Выйти</span>
+						</a>
+						<div class="nav_menu_right_name">
+							<p>{{ current_user.login }}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</nav>
+		<div class="cont_main">
+			<div class="main">
+				{% block content %}{% endblock %}
+			</div>
+		</div>
+		<script>
+			const btn1 = document.getElementById('menu');
+			const btn2 = document.getElementById('menu_close');
+			const btn3 = document.getElementById('contacts');
+			if (btn1) {
+			  	btn1.addEventListener('click', () => {
+					document.querySelector('.nav_menu_left').classList.add('active');
+			  });
+			}
+			if (btn2) {
+			  	btn2.addEventListener('click', () => {
+					document.querySelector('.nav_menu_left').classList.remove('active');
+			  });
+			}
+		</script>
+	</body>
+</html>

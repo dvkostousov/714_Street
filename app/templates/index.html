@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+{% block content %}
+<div>
+  <div class="hero-slider">
+    <div class="hero-slider__item ">
+      <div class="hero-slider__item__image">
+        <img src="{{ url_for('static', filename='images//image_3.jpg') }}" alt="">
+      </div>
+    </div>
+  </div>
+  <div class="section ">
+    <div class="section__body">
+      <div class="grid grid-col-4 grid-col-md-2 grid-col-sm-1" style="gap: 10px;">
+        <div class="policy-card">
+          <div class="policy-card__icon">
+            <i class="bx bx-shopping-bag"></i>
+          </div>
+          <div class="policy-card__info">
+            <div class="policy-card__info__name">Быстрая доставка</div>
+            <div class="policy-card__info__description">Доставим СДЭК в течении 1-6 дней</div>
+          </div>
+        </div>
+        <div class="policy-card">
+          <div class="policy-card__icon">
+            <i class="bx bx-credit-card"></i>
+          </div>
+          <div class="policy-card__info">
+            <div class="policy-card__info__name">Удобная оплата</div>
+            <div class="policy-card__info__description">Оплатите переводом любым удобным для Вас способом</div>
+          </div>
+        </div>
+        <div class="policy-card">
+          <div class="policy-card__icon">
+            <i class="bx bx-diamond"></i>
+          </div>
+          <div class="policy-card__info">
+            <div class="policy-card__info__name">VIP клиенты</div>
+            <div class="policy-card__info__description">Специальные предложения на заказы от 15.000 рублей</div>
+          </div>
+        </div>
+        <div class="policy-card">
+          <div class="policy-card__icon">
+            <i class="bx bx-donate-heart"></i>
+          </div>
+          <div class="policy-card__info">
+            <div class="policy-card__info__name">Гарантия возврата</div>
+            <div class="policy-card__info__description">Вернем деньги, если Вас не устроит товар</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section ">
+    <div class="section__title">
+      <p>Tоп продаж</p>
+    </div>
+    <div class="section__body">
+      <div class="grid grid-col-4 grid-col-md-2 grid-col-sm-2" style="gap: 10px;">
+        {% for product in products_top %}
+          <div class="product-card">
+              <a href="{{ url_for('main.product', product_id=product.id) }}">
+                  <div class="product-card__image">
+                      <img src="{{ url_for('static',filename='photos/'+product.main_photo) }}"  alt="">
+                  </div>
+              </a>
+              <a href="{{ url_for('main.product', product_id=product.id) }}">
+                  <h3 class="product-card__name">{{ product.name }}</h3>
+                  <div class="product-card__price">
+                      {{ product.price }}
+                      {% if product.old_price %}
+                         <span class="product-card__price__old">
+                              <del>{{ product.old_price }}</del>
+                          </span>
+                      {% endif %}
+                  </div>
+              </a>
+              <div class="product-card__btn">
+                  <button class="btn bg-main btn-sm">
+                      <a href="{{ url_for('main.product', product_id=product.id) }}" class="btn__txt"> Выбрать</a>
+                  </button>
+              </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="section ">
+    <div class="section__title">
+      <p>Новая колллекция</p>
+    </div>
+    <div class="section__body">
+      <div class="grid grid-col-4 grid-col-md-2 grid-col-sm-2" style="gap: 10px;">
+        {% for product in products_new_collection %}
+          <div class="product-card">
+              <a href="{{ url_for('main.product', product_id=product.id) }}">
+                  <div class="product-card__image">
+                      <img src="{{ url_for('static',filename='photos/'+product.main_photo) }}"  alt="">
+                  </div>
+              </a>
+              <a href="{{ url_for('main.product', product_id=product.id) }}">
+                  <h3 class="product-card__name">{{ product.name }}</h3>
+                  <div class="product-card__price">
+                      {{ product.price }}
+                      {% if product.old_price %}
+                         <span class="product-card__price__old">
+                              <del>{{ product.old_price }}</del>
+                          </span>
+                      {% endif %}
+                  </div>
+              </a>
+              <div class="product-card__btn">
+                  <button class="btn bg-main btn-sm">
+                      <a href="{{ url_for('main.product', product_id=product.id) }}" class="btn__txt"> Выбрать</a>
+                  </button>
+              </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="section ">
+    <div class="section__title">
+      <p>Акция</p>
+    </div>
+    <div class="section__body">
+      <div class="grid grid-col-4 grid-col-md-2 grid-col-sm-2" style="gap: 10px;">
+        {% for product in products_stock %}
+          <div class="product-card">
+              <a href="{{ url_for('main.product', product_id=product.id) }}">
+                  <div class="product-card__image">
+                      <img src="{{ url_for('static',filename='photos/'+product.main_photo) }}"  alt="">
+                  </div>
+              </a>
+              <a href="{{ url_for('main.product', product_id=product.id) }}">
+                  <h3 class="product-card__name">{{ product.name }}</h3>
+                  <div class="product-card__price">
+                      {{ product.price }}
+                      {% if product.old_price %}
+                         <span class="product-card__price__old">
+                              <del>{{ product.old_price }}</del>
+                          </span>
+                      {% endif %}
+                  </div>
+              </a>
+              <div class="product-card__btn">
+                  <button class="btn bg-main btn-sm">
+                      <a href="{{ url_for('main.product', product_id=product.id) }}" class="btn__txt"> Выбрать</a>
+                  </button>
+              </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

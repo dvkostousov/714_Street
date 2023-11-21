@@ -1,0 +1,42 @@
+{% extends "base_3.html" %}
+{% block content %}
+    <div>
+        <h1 class="product_list_h1">Список товаров</h1>
+        <div class="catalog">
+            <div class="catalog__content">
+                <div>
+                    <div class="grid grid-col-4 grid-col-md-2 grid-col-sm-2" style="gap: 20px;">
+                        {% for product in products %}
+                            <div class="product-card">
+                                <a href="{{ url_for('main.product', product_id=product.id) }}">
+                                    <div class="product-card__image">
+                                        <img src="{{ url_for('static',filename='photos/'+product.main_photo) }}"  alt="">
+                                    </div>
+                                </a>
+                                <a href="{{ url_for('main.product', product_id=product.id) }}">
+                                    <h3 class="product-card__name">{{ product.name }}</h3>
+                                    <div class="product-card__price">
+                                        {{ product.price }}
+                                        {% if product.old_price %}
+                                           <span class="product-card__price__old">
+                                                <del>{{ product.old_price }}</del>
+                                            </span>
+                                        {% endif %}
+                                    </div>
+                                </a>
+                                <div class="product-card__buttons">
+                                   <div class="product-card__add__btn">
+                                       <a href="{{ url_for('main.edit_product', product_id=product.id) }}" class="btn__txt">Редактировать</a>
+                                   </div>
+                                    <div class="product-card__add__btn">
+                                        <a href="{{ url_for('main.delete_product', product_id=product.id) }}" class="btn__txt">Удалить</a>
+                                   </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

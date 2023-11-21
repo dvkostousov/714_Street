@@ -1,0 +1,70 @@
+{% extends "base_3.html" %}
+{% block content %}
+    <div class="content_base_3">
+        <h1>{{ title }}</h1>
+        <form action="" method="post" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <p>
+                Название:
+            </p>
+            <p>
+                {{ form.name() }}
+            </p>
+            <p>
+                Описание:
+            </p>
+            <p>
+                {{ form.description() }}
+            </p>
+            <p>
+                Категории:
+            </p>
+            <p>
+                {{ form.categories(class="form_product") }}
+            </p>
+            <p>
+                Размеры:
+            </p>
+            <p>
+                {{ form.sizes(class="form_product") }}
+            </p>
+            <p>
+                Цвета:
+            </p>
+            <p>
+                {{ form.colors(class="form_product") }}
+            </p>
+            <p>
+                Разделы сайта, в которых будет отображаться товар:
+            </p>
+            <p>
+                {{ form.sections(class="form_product") }}
+            </p>
+            <p>
+                Цена (в рублях):
+            </p>
+            <p>
+                {{ form.price }}
+            </p>
+            <p>
+                Старая цена:
+            </p>
+            <p>
+                {{ form.old_price }}
+            </p>
+             <p>
+                Главное фото:
+            </p>
+            <p>
+               {{ form.main_photo() }}
+            </p>
+            <p>
+                Остальные фотографии:
+            </p>
+            <p>
+               {{ form.photos() }}
+            </p>
+            <p>{{ form.submit(class="add_product_submit") }}</p>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,265 @@
+{% extends "base.html" %}
+{% block content %}
+  <div>
+    <div class="section ">
+      <div class="section__body">
+        <div class="product">
+          <div class="product__image">
+            <div class="product__image__container">
+              <div class="product__image__container__list">
+                {% for i in range (product_n) %}
+                  <div class="product__image__list__item">
+                    <img id = "{{ 'product_photo' + i|string }}" src="{{ url_for('static',filename='photos/'+product_photos[i]) }}" alt="">
+                  </div>
+                {% endfor %}
+              </div>
+              <div class="product__image__container__main">
+                <img id="main_photo" src="{{ url_for('static',filename='photos/'+product.main_photo) }}" alt="">
+              </div>
+            </div>
+            <div class="product-description ">
+              <div class="product-description__content">
+                <p>{{ product.description }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="product__info">
+            <h1 class="product__info__title">{{ product.name }}</h1>
+            <div class="product__info__item">
+              <span class="product__info__item__price">{{ product.price }} руб.</span>
+              <span class="product__info__item__oldprice">
+                <del>{{ product.old_price }} руб.</del>
+              </span>
+            </div>
+            <form action="" method="post" enctype="multipart/form-data">
+              {{ form.hidden_tag() }}
+                <div class="product__info__item">
+                  <div class="product__info__item__title">Цвет</div>
+                  <div class="product__info__item__list">
+                    {% for choice_index in range(form.colors.choices|length) %}
+                      <div class="product__info__item__list__item">
+                        {% if form.colors.choices[choice_index][0] == 'Черный' %}
+                          <input {% if choice_index == 0 %} checked {% endif %} id="{{ 'color' + choice_index|string }}" name="colors" type="radio" class="color_radio" value="{{form.colors.choices[choice_index][0]}}">
+                          <label for="{{ 'color' + choice_index|string }}" class="circle black"></label>
+                        {% elif form.colors.choices[choice_index][0] == 'Белый' %}
+                          <input {% if choice_index == 0 %} checked {% endif %} id="{{ 'color' + choice_index|string }}" name="colors" type="radio" class="color_radio" value="{{form.colors.choices[choice_index][0]}}">
+                          <label for="{{ 'color' + choice_index|string }}" class="circle white"></label>
+                        {% elif form.colors.choices[choice_index][0] == 'Оранжевый' %}
+                          <input {% if choice_index == 0 %} checked {% endif %} id="{{ 'color' + choice_index|string }}" name="colors" type="radio" class="color_radio" value="{{form.colors.choices[choice_index][0]}}">
+                          <label for="{{ 'color' + choice_index|string }}" class="circle orange"></label>
+                        {% elif form.colors.choices[choice_index][0] == 'Синий' %}
+                          <input {% if choice_index == 0 %} checked {% endif %} id="{{ 'color' + choice_index|string }}" name="colors" type="radio" class="color_radio" value="{{form.colors.choices[choice_index][0]}}">
+                          <label for="{{ 'color' + choice_index|string }}" class="circle blue"></label>
+                        {% elif form.colors.choices[choice_index][0] == 'Зеленый' %}
+                          <input {% if choice_index == 0 %} checked {% endif %} id="{{ 'color' + choice_index|string }}" name="colors" type="radio" class="color_radio" value="{{form.colors.choices[choice_index][0]}}">
+                          <label for="{{ 'color' + choice_index|string }}" class="circle green"></label>
+                        {% elif form.colors.choices[choice_index][0] == 'Коричневый' %}
+                          <input {% if choice_index == 0 %} checked {% endif %} id="{{ 'color' + choice_index|string }}" name="colors" type="radio" class="color_radio" value="{{form.colors.choices[choice_index][0]}}">
+                          <label for="{{ 'color' + choice_index|string }}" class="circle brown"></label>
+                        {% elif form.colors.choices[choice_index][0] == 'Серый' %}
+                          <input {% if choice_index == 0 %} checked {% endif %} id="{{ 'color' + choice_index|string }}" name="colors" type="radio" class="color_radio" value="{{form.colors.choices[choice_index][0]}}">
+                          <label for="{{ 'color' + choice_index|string }}" class="circle grey"></label>
+                        {% elif form.colors.choices[choice_index][0] == 'Красный' %}
+                          <input {% if choice_index == 0 %} checked {% endif %} id="{{ 'color' + choice_index|string }}" name="colors" type="radio" class="color_radio" value="{{form.colors.choices[choice_index][0]}}">
+                          <label for="{{ 'color' + choice_index|string }}" class="circle red"></label>
+                        {% elif form.colors.choices[choice_index][0] == 'Розовый' %}
+                          <input {% if choice_index == 0 %} checked {% endif %} id="{{ 'color' + choice_index|string }}" name="colors" type="radio" class="color_radio" value="{{form.colors.choices[choice_index][0]}}">
+                          <label for="{{ 'color' + choice_index|string }}" class="circle pink"></label>
+                        {% elif form.colors.choices[choice_index][0] == 'Бежевый' %}
+                          <input {% if choice_index == 0 %} checked {% endif %} id="{{ 'color' + choice_index|string }}" name="colors" type="radio" class="color_radio" value="{{form.colors.choices[choice_index][0]}}">
+                          <label for="{{ 'color' + choice_index|string }}" class="circle beige"></label>
+                        {% endif %}
+                      </div>
+                    {% endfor %}
+                  </div>
+                </div>
+                <div class="product__info__item">
+                  <div class="product__info__item__title">Размер</div>
+                  <div class="product__info__item__btn">
+                    <button type="button" id="button_size_table">Таблица размеров</button>
+                  </div>
+                  <div class="product__info__item__list">
+                    {% for choice_index in range(form.sizes.choices|length) %}
+                      <div class="product__info__item__list__item ">
+                        <input {% if choice_index == 0 %} checked {% endif %} id="{{ 'size' + choice_index|string }}" name="sizes" type="radio" class="size_radio" value="{{form.sizes.choices[choice_index][0]}}">
+                        <label for="{{ 'size' + choice_index|string }}" class="product__info__item__list__item__size">
+                          <span>{{ form.sizes.choices[choice_index][1] }}</span>
+                        </label>
+                      </div>
+                    {% endfor %}
+                  </div>
+                </div>
+                <div class="product__info__item">
+                  <div class="product__info__item__title">Количество</div>
+                  <div class="product__info__item__quantity">
+                    <div class="product__info__item__quantity__btn" id="button_minus">
+                      <i class="bx bx-minus"></i>
+                    </div>
+                    <div class="product__info__item__quantity__input">{{ form.count(class="count_product", value="1", readonly="true") }}</div>
+                    <div class="product__info__item__quantity__btn" id="button_plus">
+                      <i class="bx bx-plus"></i>
+                    </div>
+                    <p class="product__info__item__quantity__time">Срок доставки: 1-6 дней</p>
+                  </div>
+                </div>
+                <div class="product__info__item">
+                  <button class="btn bg-main  ">
+                    {{ form.submit_add_to_cart(class="btn__txt submit_choose") }}
+                  </button>
+                  <button class="btn bg-main  ">
+                    {{ form.submit_buy_one_click(class="btn__txt submit_choose") }}
+                  </button>
+                </div>
+            </form>
+            <hr>
+            <div class="product__info__item__policy">
+              <div class="product__info__item__policy__item">
+                <i class="bx bx-phone-call"></i>
+                <div class="product__info__item__policy__info__name">В течении 24 часов с Вами свяжется менеджер для подтверждения заказа</div>
+              </div>
+              <div class="product__info__item__policy__item">
+                <i class="bx bx-car"></i>
+                <div class="product__info__item__policy__info__name">Бесплатная доставка при покупке от 15.000 рублей</div>
+              </div>
+              <div class="product__info__item__policy__item">
+                <i class="bx bx-refresh"></i>
+                <div class="product__info__item__policy__info__name">Возврат в течение 7 дней после получения заказа</div>
+              </div>
+            </div>
+          </div>
+          <div class="product-description mobile ">
+            <div class="product-description__content">
+              <p>{{ product.description }}</p>
+            </div>
+          </div>
+          <div class="custom__size__modal">
+            <div class="custom__size__modal__container">
+              <div class="custom__size__modal__container__header">
+                <button class="btn bg-main" id="button_size_table_close" type="button">Закрыть</button>
+              </div>
+              <div class="custom__size__modal__container__content">
+                <h2>Таблица размеров</h2>
+                <hr>
+                <table>
+                  <thead>
+                  <tr>
+                    <td>Размер</td>
+                    <td>Рост(См)</td>
+                    <td>Вес(Кг)</td>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>XS</td>
+                    <td>150-155</td>
+                    <td>45-50</td></tr>
+                  <tr>
+                    <td>S</td>
+                    <td>156-160</td>
+                    <td>51-55</td>
+                  </tr>
+                  <tr>
+                    <td>M</td>
+                    <td>161-165</td>
+                    <td>56-60</td>
+                  </tr>
+                  <tr>
+                    <td>L</td>
+                    <td>166-170</td>
+                    <td>61-66</td>
+                  </tr>
+                  <tr>
+                    <td>XL</td>
+                    <td>171-176</td>
+                    <td>67-72</td>
+                  </tr>
+                  <tr>
+                    <td>2XL</td>
+                    <td>177-181</td>
+                    <td>73-83</td>
+                  </tr>
+                  <tr>
+                    <td>3XL</td>
+                    <td>182-186</td>
+                    <td>83-93</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section ">
+      <div class="section__title">Узнайте больше</div>
+      <div class="section__body">
+        <div class="grid grid-col-4 grid-col-md-2 grid-col-sm-1" style="gap: 0px;">
+          {% for product in products %}
+            <div class="product-card">
+                <a href="{{ url_for('main.product', product_id=product.id) }}">
+                    <div class="product-card__image">
+                        <img src="{{ url_for('static',filename='photos/'+product.main_photo) }}"  alt="">
+                    </div>
+                </a>
+                <a href="{{ url_for('main.product', product_id=product.id) }}">
+                    <h3 class="product-card__name">{{ product.name }}</h3>
+                    <div class="product-card__price">
+                        {{ product.price }}
+                        {% if product.old_price %}
+                           <span class="product-card__price__old">
+                                <del>{{ product.old_price }}</del>
+                            </span>
+                        {% endif %}
+                    </div>
+                </a>
+                <div class="product-card__btn">
+                    <button class="btn bg-main btn-sm">
+                        <a href="{{ url_for('main.product', product_id=product.id) }}" class="btn__txt"> Выбрать</a>
+                    </button>
+                </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+        const btn6 = document.getElementById('button_size_table');
+        const btn7 = document.getElementById('button_size_table_close');
+        const btn8 = document.getElementById('button_minus');
+        const btn9 = document.getElementById('button_plus');
+        if (btn6) {
+			  	btn6.addEventListener('click', () => {
+					document.querySelector('.custom__size__modal').classList.add('active');
+			    });
+		    }
+		if (btn7) {
+			  	btn7.addEventListener('click', () => {
+					document.querySelector('.custom__size__modal').classList.remove('active');
+			  });
+			}
+	    for (var i = 0; i < {{ product_n }}; i++) {
+	    const btnn = document.getElementById('product_photo'+i)
+	      if (btnn) {
+              btnn.addEventListener('click', () => {
+					document.getElementById('main_photo').src = btnn.src;
+			    });
+	      }
+	    }
+	    if (btn8) {
+			  	btn8.addEventListener('click', () => {
+					if (document.querySelector('.count_product').value > 1) {
+					  document.querySelector('.count_product').value -= 1;
+					}
+			    });
+		    }
+         if (btn9) {
+                btn9.addEventListener('click', () => {
+                    if (document.querySelector('.count_product').value < 99) {
+                       document.querySelector('.count_product').value = Number(document.querySelector('.count_product').value) + 1;
+                    }
+                });
+            }
+  </script>
+{% endblock %}

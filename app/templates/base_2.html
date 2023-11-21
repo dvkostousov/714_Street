@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<noscript>You need to enable JavaScript to run this app.</noscript>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<link rel="icon" type="image/png" href="{{ url_for('static', filename='images//logo714.png') }}">
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/media-queries.css') }}" />
+		<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+		<html lang="ru" />
+		{% block head %}{% endblock %}
+		<title>714 Street - {{ title }}</title>
+	</head>
+	<body id="body">
+		<nav>
+			<div class="main_nav">
+				<div class="nav_logo">
+					<a href="/"><img class="img_logo" src="{{ url_for('static', filename='images//logo714trang.png') }}" alt=""></a>
+				</div>
+			</div>
+		</nav>
+		<div class="cont_main">
+			<div class="main_2">
+				{% block content %}{% endblock %}
+			</div>
+		</div>
+		<script>
+			const btn1 = document.getElementById('menu');
+			const btn2 = document.getElementById('menu_close');
+
+			if (btn1) {
+			  	btn1.addEventListener('click', () => {
+					document.querySelector('.nav_menu_left').classList.add('active');
+			  });
+			}
+			if (btn2) {
+			  	btn2.addEventListener('click', () => {
+					document.querySelector('.nav_menu_left').classList.remove('active');
+			  });
+			}
+		</script>
+	</body>
+</html>
